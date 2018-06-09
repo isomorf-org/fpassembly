@@ -5,6 +5,7 @@
   "$ref": "#/definitions/definition",
   "definitions": {
     "definition": {
+      "title": "Definition",
       "oneOf": [
         {
           "$ref": "#/definitions/function-definition"
@@ -15,6 +16,7 @@
       ]
     },
     "function-definition": {
+      "title": "Function Definition",
       "description": "defines a function",
       "type": "object",
       "properties": {
@@ -24,12 +26,14 @@
       }
     },
     "type-definition": {
+      "title": "Type Definition",
       "description": "defines a type",
       "type": "object",
       "properties": {
       }
     },
     "identifier": {
+      "title": "Identifier",
       "description": "name of a top-level definition",
       "type": "object",
       "properties": {
