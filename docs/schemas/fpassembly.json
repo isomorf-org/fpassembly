@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "https://fpassembly.org/schemas/fpassembly.json",
+  "idx": "https://fpassembly.org/schemas/fpassembly.json",
   "version": "1",
   "$ref": "#/definitions/definition",
   "definitions": {
@@ -22,8 +22,18 @@
       "properties": {
         "identifier": {
           "$ref": "#/definitions/identifier"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
         }
-      }
+      },
+      "required": [
+        "identifier",
+        "args"
+      ]
     },
     "type-definition": {
       "title": "Type Definition",
@@ -46,7 +56,24 @@
         "handle": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "namespace",
+        "handle"
+      ]
+    },
+    "symbol": {
+      "title": "Symbol",
+      "description": "a local name",
+      "type": "object",
+      "properties": {
+        "handle": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "handle"
+      ]
     }
   }
 }

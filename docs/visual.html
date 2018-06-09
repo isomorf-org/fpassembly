@@ -155,6 +155,14 @@
         .deprecated text {
             fill: orange;
         }
+
+        p.credit {
+            text-align: center;
+        }
+
+        p.credit a {
+            display: inline;
+        }
     </style>
 </head>
 <body>
@@ -181,17 +189,28 @@
         </div>
     </div>
 </div>
+<p class="credit">
+    Based on
+    <a href="https://github.com/jlblcc">jlblcc</a>'s
+    <a href="https://github.com/jlblcc/json-schema-viewer">json-schema-viewer</a>
+</p>
 
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type='text/javascript' src="https://jlblcc.github.io/json-schema-viewer/json-schema-viewer.min.js"></script>
 <script type='text/javascript'>
     (function ($) {
 
-        var loc = window.location;
-        //if not already set, set the root schema location
-        //this allows dev ENV to override the schema location
-        var schema = 'https://fpassembly.org/schemas/fpassembly.json';
-        console.log(schema);
+        function toSchema() {
+            var loc = window.location;
+            if (loc.hostname === 'localhost') {
+                return loc.origin + loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1) + 'schemas/fpassembly.json';
+            } else {
+                return 'https://fpassembly.org/schemas/fpassembly.json';
+            }
+        }
+
+        var schema = toSchema();
+        console.log('schema', schema);
 
         JSV.init({
             schema: schema,
@@ -199,7 +218,6 @@
             viewerHeight: $('#main-body').height(), //set initial dimensions of SVG
             viewerWidth: $('#main-body').width()
         }, function () {
-            console.log('hi')
             $('#jsv-tree').css('width', '100%');
             //set diagram width to 100%, this DOES NOT resize the svg container
             //it will not adjust to window resize, needs a listener to support that
