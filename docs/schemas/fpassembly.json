@@ -10,7 +10,7 @@
           "$ref": "#/definitions/function-definition"
         },
         {
-          "$ref": "#/definitions/function-type"
+          "$ref": "#/definitions/type-definition"
         }
       ]
     },
