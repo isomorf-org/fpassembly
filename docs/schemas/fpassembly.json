@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "idx": "https://fpassembly.org/schemas/fpassembly.json",
+  "id": "https://fpassembly.org/schemas/fpassembly.json",
   "version": "1",
   "$ref": "#/definitions/definition",
   "definitions": {
@@ -11,7 +11,16 @@
           "$ref": "#/definitions/function-definition"
         },
         {
+          "$ref": "#/definitions/native-function-definition"
+        },
+        {
+          "$ref": "#/definitions/effect-function-definition"
+        },
+        {
           "$ref": "#/definitions/type-definition"
+        },
+        {
+          "$ref": "#/definitions/native-type-definition"
         }
       ]
     },
@@ -23,6 +32,37 @@
         "identifier": {
           "$ref": "#/definitions/identifier"
         },
+        "function-type": {
+          "$ref": "#/definitions/function-type"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
+        },
+        "expression": {
+          "$ref": "#/definitions/expression"
+        }
+      },
+      "required": [
+        "identifier",
+        "function-type",
+        "args",
+        "expression"
+      ]
+    },
+    "native-function-definition": {
+      "title": "Native Function Definition",
+      "description": "defines a function with a native implementation",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "function-type": {
+          "$ref": "#/definitions/function-type"
+        },
         "args": {
           "type": "array",
           "items": {
@@ -32,6 +72,31 @@
       },
       "required": [
         "identifier",
+        "function-type",
+        "args"
+      ]
+    },
+    "effect-function-definition": {
+      "title": "Effect Function Definition",
+      "description": "defines a function with a native implementation that represents an effectful operation",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "function-type": {
+          "$ref": "#/definitions/function-type"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "function-type",
         "args"
       ]
     },
@@ -40,7 +105,157 @@
       "description": "defines a type",
       "type": "object",
       "properties": {
+        "data-type": {
+          "$ref": "#/definitions/data-type"
+        },
+        "constructors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/constructor"
+          }
+        }
+      },
+      "required": [
+        "data-type",
+        "constructors"
+      ]
+    },
+    "native-type-definition": {
+      "title": "Native Type Definition",
+      "description": "defines a native type",
+      "type": "object",
+      "properties": {
+        "data-type": {
+          "$ref": "#/definitions/data-type"
+        }
+      },
+      "required": [
+        "data-type"
+      ]
+    },
+    "expression": {
+      "title": "Expression",
+      "oneOf": [
+      ]
+    },
+    "pattern": {
+      "title": "Pattern",
+      "oneOf": [
+      ]
+    },
+    "type": {
+      "title": "Type",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/data-type"
+        },
+        {
+          "$ref": "#/definitions/function-type"
+        },
+        {
+          "$ref": "#/definitions/generic-type"
+        },
+        {
+          "$ref": "#/definitions/todo-type"
+        }
+      ]
+    },
+    "data-type": {
+      "title": "Data Type",
+      "description": "a data type",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "contains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/type"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "contains"
+      ]
+    },
+    "function-type": {
+      "title": "Function Type",
+      "description": "a function type",
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/type"
+          }
+        },
+        "ret": {
+          "$ref": "#/definitions/type"
+        }
+      },
+      "required": [
+        "args",
+        "ret"
+      ]
+    },
+    "generic-type": {
+      "title": "Generic Type",
+      "description": "a generic type",
+      "type": "object",
+      "properties": {
+        "name": "string"
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "todo-type": {
+      "title": "Genenric Type",
+      "description": "a generic type",
+      "type": "object",
+      "properties": {
       }
+    },
+    "case": {
+      "title": "Case",
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "$ref": "#/definitions/pattern"
+        },
+        "expression": {
+          "$ref": "#/definitions/expression"
+        }
+      }
+    },
+    "constructor": {
+      "title": "Constructor",
+      "description": "a data constructor",
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/type"
+          }
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
+        }
+      },
+      "required": [
+        "symbol",
+        "types",
+        "args"
+      ]
     },
     "identifier": {
       "title": "Identifier",
