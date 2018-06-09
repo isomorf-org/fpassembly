@@ -5,4 +5,7 @@ latestVersion: 0.1.0
 
 #HELLO
 
-{latestVersion}
+```
+libraryDependencies += "org.isomorf" %% "foundation-runtime-pure" % "{latestVersion}"
+```
+
