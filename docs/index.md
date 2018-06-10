@@ -7,6 +7,8 @@ fpassembly is:
 * [statically typed](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)
 * [eagerly evaluated](https://en.wikipedia.org/wiki/Eager_evaluation)
 
+fpassembly is the underlying currency of [isomorƒ](https://isomorf.io)
+
 # Schemas
 * [JSON Schema v4](https://fpassembly.org/schemas/fpassembly.json)
 
