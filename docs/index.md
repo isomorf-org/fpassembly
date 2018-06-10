@@ -12,6 +12,8 @@ fpassembly is the underlying currency of [isomorƒ](https://isomorf.io)
 # Schemas
 * [JSON Schema v4](https://fpassembly.org/schemas/fpassembly.json)
 
+<!---
 # [Visualization](https://fpassembly.org/visual.html)
 <iframe src="https://fpassembly.org/visual.html" frameborder="0" width="100%" height="640"></iframe>
+--->
 

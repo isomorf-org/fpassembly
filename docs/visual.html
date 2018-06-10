@@ -212,6 +212,18 @@
         var schema = toSchema();
         console.log('schema', schema);
 
+        JSV._compileData = JSV.compileData;
+        JSV.mapping = {};
+
+        JSV.compileData = function (schema, parent, name, real, depth) {
+            var result = JSV._compileData(schema, parent, name, real, depth);
+            if (name) {
+                JSV.mapping[name] = parent;
+            }
+
+            return result;
+        };
+
         JSV.init({
             schema: schema,
             plain: true, //don't use JQM
