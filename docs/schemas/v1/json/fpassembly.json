@@ -1,98 +1,616 @@
 {
-
   "$schema": "http://json-schema.org/draft-04/schema#",
-
   "id": "https://fpassembly.org/schemas/v1/json/fpassembly.json",
-
   "version": "1",
-
   "$ref": "#/definitions/definition",
-
   "definitions": {
-
     "definition": {
-
       "title": "Definition",
-
       "oneOf": [
-
         {
-
           "$ref": "#/definitions/function-definition"
-
         },
-
         {
-
           "$ref": "#/definitions/native-function-definition"
-
         },
-
         {
-
           "$ref": "#/definitions/effect-function-definition"
-
         },
-
         {
-
           "$ref": "#/definitions/type-definition"
-
         },
-
         {
-
           "$ref": "#/definitions/native-type-definition"
-
         }
-
       ]
-
     },
-
     "function-definition": {
-
       "title": "Function Definition",
-
       "description": "defines a function",
-
       "type": "object",
-
       "properties": {
-
         "identifier": {
-
           "$ref": "#/definitions/identifier"
-
         },
-
         "function-type": {
-
           "$ref": "#/definitions/function-type"
-
         },
-
         "args": {
-
           "type": "array",
-
           "items": {
-
             "$ref": "#/definitions/symbol"
-
           }
-
         },
-
         "expression": {
-
           "$ref": "#/definitions/expression"
-
         }
-
       },
-
       "required": [
-
         "identifier",
-
+        "function-type",
+        "args",
+        "expression"
+      ]
+    },
+    "native-function-definition": {
+      "title": "Native Function Definition",
+      "description": "defines a function with a native implementation",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "function-type": {
+          "$ref": "#/definitions/function-type"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "function-type",
+        "args"
+      ]
+    },
+    "effect-function-definition": {
+      "title": "Effect Function Definition",
+      "description": "defines a function with a native implementation that represents an effectful operation",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "function-type": {
+          "$ref": "#/definitions/function-type"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "function-type",
+        "args"
+      ]
+    },
+    "type-definition": {
+      "title": "Type Definition",
+      "description": "defines a type",
+      "type": "object",
+      "properties": {
+        "data-type": {
+          "$ref": "#/definitions/data-type"
+        },
+        "constructors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/constructor"
+          }
+        }
+      },
+      "required": [
+        "data-type",
+        "constructors"
+      ]
+    },
+    "native-type-definition": {
+      "title": "Native Type Definition",
+      "description": "defines a native type",
+      "type": "object",
+      "properties": {
+        "data-type": {
+          "$ref": "#/definitions/data-type"
+        }
+      },
+      "required": [
+        "data-type"
+      ]
+    },
+    "expression": {
+      "title": "Expression",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/constant-expression"
+        },
+        {
+          "$ref": "#/definitions/local-reference-expression"
+        },
+        {
+          "$ref": "#/definitions/function-reference-expression"
+        },
+        {
+          "$ref": "#/definitions/constructor-reference-expression"
+        },
+        {
+          "$ref": "#/definitions/local-application-expression"
+        },
+        {
+          "$ref": "#/definitions/function-application-expression"
+        },
+        {
+          "$ref": "#/definitions/constructor-application-expression"
+        },
+        {
+          "$ref": "#/definitions/match-expression"
+        },
+        {
+          "$ref": "#/definitions/complex-expression"
+        },
+        {
+          "$ref": "#/definitions/todo-expression"
+        }
+      ]
+    },
+    "constant-expression": {
+      "title": "Constant Expression",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/type"
+        }
+      },
+      "required": [
+        "value",
+        "type"
+      ]
+    },
+    "local-reference-expression": {
+      "title": "Local Reference Expression",
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        }
+      },
+      "required": [
+        "symbol"
+      ]
+    },
+    "function-reference-expression": {
+      "title": "Function Reference Expression",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        }
+      },
+      "required": [
+        "identifier"
+      ]
+    },
+    "constructor-reference-expression": {
+      "title": "Constructor Reference Expression",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        }
+      },
+      "required": [
+        "identifier",
+        "symbol"
+      ]
+    },
+    "local-application-expression": {
+      "title": "Local Application Expression",
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expression"
+          }
+        }
+      },
+      "required": [
+        "symbol",
+        "args"
+      ]
+    },
+    "function-application-expression": {
+      "title": "Function Application Expression",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expression"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "args"
+      ]
+    },
+    "constructor-application-expression": {
+      "title": "Constructor Application Expression",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expression"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "symbol",
+        "args"
+      ]
+    },
+    "match-expression": {
+      "title": "Match Expression",
+      "type": "object",
+      "properties": {
+        "expression": {
+          "$ref": "#/definitions/expression"
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/case"
+          }
+        },
+        "otherwise": {
+          "$ref": "#/definitions/expression"
+        }
+      },
+      "required": [
+        "expression",
+        "cases"
+      ]
+    },
+    "complex-expression": {
+      "title": "Complex Expression",
+      "type": "object",
+      "properties": {
+        "locals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/local"
+          }
+        },
+        "expression": {
+          "$ref": "#/definitions/expression"
+        }
+      },
+      "required": [
+        "locals",
+        "expression"
+      ]
+    },
+    "todo-expression": {
+      "title": "Todo Expression",
+      "type": "object",
+      "properties": {
+      }
+    },
+    "pattern": {
+      "title": "Pattern",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/any-pattern"
+        },
+        {
+          "$ref": "#/definitions/constant-pattern"
+        },
+        {
+          "$ref": "#/definitions/type-pattern"
+        },
+        {
+          "$ref": "#/definitions/constructor-pattern"
+        },
+        {
+          "$ref": "#/definitions/todo-pattern"
+        },
+        {
+          "$ref": "#/definitions/ignore-pattern"
+        }
+      ]
+    },
+    "any-pattern": {
+      "title": "Any Pattern",
+      "type": "object",
+      "properties": {
+        "guide": {
+          "$ref": "#/definitions/symbol"
+        }
+      },
+      "required": [
+        "guide"
+      ]
+    },
+    "constant-pattern": {
+      "title": "Constant Pattern",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/type"
+        }
+      },
+      "required": [
+        "value",
+        "type"
+      ]
+    },
+    "type-pattern": {
+      "title": "Type Pattern",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/type"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "constructor-pattern": {
+      "title": "Constructor Pattern",
+      "type": "object",
+      "properties": {
+        "guide": {
+          "$ref": "#/definitions/symbol"
+        },
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        },
+        "patterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pattern"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "symbol",
+        "patterns"
+      ]
+    },
+    "todo-pattern": {
+      "title": "Todo Pattern",
+      "type": "object",
+      "properties": {
+      }
+    },
+    "ignore-pattern": {
+      "title": "Ignore Pattern",
+      "type": "object",
+      "properties": {
+      }
+    },
+    "type": {
+      "title": "Type",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/data-type"
+        },
+        {
+          "$ref": "#/definitions/function-type"
+        },
+        {
+          "$ref": "#/definitions/generic-type"
+        },
+        {
+          "$ref": "#/definitions/todo-type"
+        }
+      ]
+    },
+    "data-type": {
+      "title": "Data Type",
+      "description": "a data type",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/identifier"
+        },
+        "contains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/type"
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "contains"
+      ]
+    },
+    "function-type": {
+      "title": "Function Type",
+      "description": "a function type",
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/type"
+          }
+        },
+        "ret": {
+          "$ref": "#/definitions/type"
+        }
+      },
+      "required": [
+        "args",
+        "ret"
+      ]
+    },
+    "generic-type": {
+      "title": "Generic Type",
+      "description": "a generic type",
+      "type": "object",
+      "properties": {
+        "name": "string"
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "todo-type": {
+      "title": "Todo Type",
+      "description": "a todo type",
+      "type": "object",
+      "properties": {
+      }
+    },
+    "case": {
+      "title": "Case",
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "$ref": "#/definitions/pattern"
+        },
+        "expression": {
+          "$ref": "#/definitions/expression"
+        }
+      },
+      "required": [
+        "pattern",
+        "expression"
+      ]
+    },
+    "constructor": {
+      "title": "Constructor",
+      "description": "a data constructor",
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/type"
+          }
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
+        }
+      },
+      "required": [
+        "symbol",
+        "types",
+        "args"
+      ]
+    },
+    "local": {
+      "title": "Local Function Definition",
+      "description": "defines a local function",
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "$ref": "#/definitions/symbol"
+        },
+        "function-type": {
+          "$ref": "#/definitions/function-type"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/symbol"
+          }
+        },
+        "expression": {
+          "$ref": "#/definitions/expression"
+        }
+      },
+      "required": [
+        "symbol",
+        "function-type",
+        "args",
+        "expression"
+      ]
+    },
+    "identifier": {
+      "title": "Identifier",
+      "description": "name of a top-level definition",
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "handle": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace",
+        "handle"
+      ]
+    },
+    "symbol": {
+      "title": "Symbol",
+      "description": "a local name",
+      "type": "object",
+      "properties": {
+        "handle": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "handle"
+      ]
+    }
+  }
+}
