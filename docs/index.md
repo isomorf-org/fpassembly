@@ -1,3 +1,9 @@
+---
+latestVersion: 1
+---
+
+({{ page.latestVersion }})
+
 # What is *fpassembly*?
 fpassembly is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) representation of a simple, abstract Functional Programming language.
 
