@@ -1,0 +1,98 @@
+{
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "id": "https://fpassembly.org/schemas/v1/json/fpassembly.json",
+
+  "version": "1",
+
+  "$ref": "#/definitions/definition",
+
+  "definitions": {
+
+    "definition": {
+
+      "title": "Definition",
+
+      "oneOf": [
+
+        {
+
+          "$ref": "#/definitions/function-definition"
+
+        },
+
+        {
+
+          "$ref": "#/definitions/native-function-definition"
+
+        },
+
+        {
+
+          "$ref": "#/definitions/effect-function-definition"
+
+        },
+
+        {
+
+          "$ref": "#/definitions/type-definition"
+
+        },
+
+        {
+
+          "$ref": "#/definitions/native-type-definition"
+
+        }
+
+      ]
+
+    },
+
+    "function-definition": {
+
+      "title": "Function Definition",
+
+      "description": "defines a function",
+
+      "type": "object",
+
+      "properties": {
+
+        "identifier": {
+
+          "$ref": "#/definitions/identifier"
+
+        },
+
+        "function-type": {
+
+          "$ref": "#/definitions/function-type"
+
+        },
+
+        "args": {
+
+          "type": "array",
+
+          "items": {
+
+            "$ref": "#/definitions/symbol"
+
+          }
+
+        },
+
+        "expression": {
+
+          "$ref": "#/definitions/expression"
+
+        }
+
+      },
+
+      "required": [
+
+        "identifier",
+
