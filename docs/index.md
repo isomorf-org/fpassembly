@@ -10,7 +10,20 @@ fpassembly is:
 fpassembly is the underlying currency of [isomorƒ](https://isomorf.io)
 
 # Schemas
-* [JSON Schema v4](https://fpassembly.org/schemas/fpassembly.json)
+<dl>
+  <dt>
+    <a href="http://json-schema.org/">JSON Schema v4</a>
+  </dt>
+  <dd>
+    <a href="https://fpassembly.org/schemas/v1/json/fpassembly.json">fpassembly.json</a>
+  </dd>
+  <dt>
+    <a href="https://developers.google.com/protocol-buffers/">Protocol Buffers Schema</a>
+  </dt>
+  <dd>
+    <a href="https://fpassembly.org/schemas/v1/protobuf/fpassembly.proto">fpassembly.proto</a>
+  </dd>
+</dl>
 
 <!---
 # [Visualization](https://fpassembly.org/visual.html)
