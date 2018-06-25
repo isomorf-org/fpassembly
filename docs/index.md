@@ -2,8 +2,6 @@
 latestVersion: 1
 ---
 
-({{ page.latestVersion }})
-
 # What is *fpassembly*?
 fpassembly is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) representation of a simple, abstract Functional Programming language.
 
@@ -21,13 +19,13 @@ fpassembly is the underlying currency of [isomorƒ](https://isomorf.io)
     <a href="http://json-schema.org/">JSON Schema v4</a>
   </dt>
   <dd>
-    <a href="https://fpassembly.org/schemas/v1/json/fpassembly.json">fpassembly.json</a>
+    <a href="https://fpassembly.org/schemas/v{{ page.latestVersion }}/json/fpassembly.json">fpassembly.json</a>
   </dd>
   <dt>
     <a href="https://developers.google.com/protocol-buffers/">Protocol Buffers Schema</a>
   </dt>
   <dd>
-    <a href="https://fpassembly.org/schemas/v1/protobuf/fpassembly.proto">fpassembly.proto</a>
+    <a href="https://fpassembly.org/schemas/v{{ page.latestVersion }}/protobuf/fpassembly.proto">fpassembly.proto</a>
   </dd>
 </dl>
 
