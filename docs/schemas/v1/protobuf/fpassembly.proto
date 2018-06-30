@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package fpassembly.storage.protobuf.v1;
+package org.fpassembly.storage.protobuf.v1;
 
 // ###############
 // ## Reference ##
