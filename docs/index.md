@@ -34,3 +34,11 @@ fpassembly is the underlying currency of [isomorƒ](https://isomorf.io)
 <iframe src="https://fpassembly.org/visual.html" frameborder="0" width="100%" height="640"></iframe>
 --->
 
+# Models
+
+## Scala
+* [Idiomatic Scala](https://github.com/isomorf-org/scala-fpassembly)
+* [Protobuf](https://github.com/isomorf-org/scala-fpassembly-protobuf)
+
+
+
