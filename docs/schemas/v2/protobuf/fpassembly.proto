@@ -189,18 +189,18 @@ message Case {
 // ## Local ##
 // ###########
 message LocalFunctionDefinition {
-	Symbol symbol = 1;
-	Expression expression = 4;
-  repeated Arg args = 5;
-  Type ret = 6;
+	Symbol symbol = 4;
+	Expression expression = 5;
+  repeated Arg args = 6;
+  Type ret = 7;
 }
 
 // #################
 // ## Constructor ##
 // #################
 message ConstructorDefinition {
-	Symbol symbol = 1;
-  repeated Arg args = 4;
+	Symbol symbol = 4;
+  repeated Arg args = 5;
 }
 
 // ################
@@ -217,22 +217,22 @@ message Definition {
 }
 
 message FunctionDefinition {
-	Identifier identifier = 1;
-	Expression expression = 4;
+	Identifier identifier = 4;
+	Expression expression = 5;
+  repeated Arg args = 6;
+  Type ret = 7;
+}
+
+message NativeFunctionDefinition {
+	Identifier identifier = 4;
   repeated Arg args = 5;
   Type ret = 6;
 }
 
-message NativeFunctionDefinition {
-	Identifier identifier = 1;
-  repeated Arg args = 4;
-  Type ret = 5;
-}
-
 message EffectFunctionDefinition {
-	Identifier identifier = 1;
-  repeated Arg args = 4;
-  Type ret = 5;
+	Identifier identifier = 4;
+  repeated Arg args = 5;
+  Type ret = 6;
 }
 
 message TypeDefinition {
