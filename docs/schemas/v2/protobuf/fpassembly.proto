@@ -1,0 +1,245 @@
+syntax = "proto3";
+
+package org.fpassembly.storage.protobuf.v2;
+
+// ###############
+// ## Reference ##
+// ###############
+message Reference {
+	oneof value {
+		Identifier identifier = 1;
+		Symbol symbol = 2;
+	}
+}
+
+message Identifier {
+	repeated string namespace = 1;
+	string handle = 2;
+}
+
+message Symbol {
+	string handle = 1;
+}
+
+// ##########
+// ## Type ##
+// ##########
+message Type {
+	oneof value {
+		DataType dataType = 1;
+		GenericType genericType = 2;
+		FunctionType functionType = 3;
+		TodoType todoType = 4;
+    SimpleDataType simpleDataType = 5;
+	}
+}
+
+message SimpleDataType {
+	Identifier identifier = 1;
+}
+
+message DataType {
+	Identifier identifier = 1;
+	repeated Type contains = 2;
+}
+
+message GenericType {
+	string name = 1;
+}
+
+message FunctionType {
+	repeated Type args = 1;
+	Type ret = 2;
+}
+
+message TodoType {
+}
+
+// ################
+// ## Expression ##
+// ################
+message Expression {
+	oneof value {
+		ConstantExpression constantExpression = 1;
+		LocalReferenceExpression localReferenceExpression = 2;
+		FunctionReferenceExpression functionReferenceExpression = 3;
+		ConstructorReferenceExpression constructorReferenceExpression = 4;
+		LocalApplicationExpression localApplicationExpression = 5;
+		FunctionApplicationExpression functionApplicationExpression = 6;
+		ConstructorApplicationExpression constructorApplicationExpression = 7;
+		MatchExpression matchExpression = 8;
+		ComplexExpression complexExpression = 9;
+		TodoExpression todoExpression = 10;
+	}
+}
+
+message ConstantExpression {
+	Type type = 2;
+  Literal literal = 3;
+}
+
+message LocalReferenceExpression {
+	Symbol symbol = 1;
+}
+
+message FunctionReferenceExpression {
+	Identifier identifier = 1;
+}
+
+message ConstructorReferenceExpression {
+	Symbol symbol = 1;
+	Identifier identifier = 2;
+}
+
+message LocalApplicationExpression {
+	Symbol symbol = 1;
+	repeated Expression args = 2;
+}
+
+message FunctionApplicationExpression {
+	Identifier identifier = 1;
+	repeated Expression args = 2;
+}
+
+message ConstructorApplicationExpression {
+	Identifier identifier = 1;
+	Symbol symbol = 2;
+	repeated Expression args = 3;
+}
+
+message MatchExpression {
+	Expression expression = 1;
+	repeated Case cases = 2;
+	Expression otherwise = 3;
+}
+
+message ComplexExpression {
+	repeated LocalFunctionDefinition locals = 1;
+	Expression expression = 2;
+}
+
+message TodoExpression {
+}
+
+// #############
+// ## Pattern ##
+// #############
+message Pattern {
+	oneof value {
+		AnyPattern anyPattern = 1;
+		ConstantPattern constantPattern = 2;
+		TypePattern typePattern = 3;
+		ConstructorPattern constructorPattern = 4;
+		TodoPattern todoPattern = 5;
+		IgnorePattern ignorePattern = 6;
+	}
+}
+
+message AnyPattern {
+	Symbol guide = 1;
+}
+
+message ConstantPattern {
+	Type type = 2;
+  Literal literal = 3;
+}
+
+message TypePattern {
+	Symbol guide = 1;
+	Type type = 2;
+}
+
+message ConstructorPattern {
+	Symbol guide = 1;
+	Identifier identifier = 2;
+	Symbol symbol = 3;
+	repeated Pattern patterns = 4;
+}
+
+message TodoPattern {
+}
+
+message IgnorePattern {
+}
+
+// ##########
+// ## Literal ##
+// ##########
+message Literal {
+	string value = 1;
+}
+
+// ##########
+// ## Arg ##
+// ##########
+message Arg {
+	Symbol symbol = 1;
+	Type type = 2;
+}
+
+// ##########
+// ## Case ##
+// ##########
+message Case {
+	Pattern pattern = 1;
+	Expression expression = 2;
+}
+
+// ###########
+// ## Local ##
+// ###########
+message LocalFunctionDefinition {
+	Symbol symbol = 1;
+	Expression expression = 4;
+  repeated Arg args = 5;
+  Type ret = 6;
+}
+
+// #################
+// ## Constructor ##
+// #################
+message ConstructorDefinition {
+	Symbol symbol = 1;
+  repeated Arg args = 4;
+}
+
+// ################
+// ## Definition ##
+// ################
+message Definition {
+	oneof value {
+		FunctionDefinition functionDefinition = 1;
+		NativeFunctionDefinition nativeFunctionDefinition = 2;
+		EffectFunctionDefinition effectFunctionDefinition = 3;
+		TypeDefinition typeDefinition = 4;
+		NativeTypeDefinition nativeTypeDefinition = 5;
+	}
+}
+
+message FunctionDefinition {
+	Identifier identifier = 1;
+	Expression expression = 4;
+  repeated Arg args = 5;
+  Type ret = 6;
+}
+
+message NativeFunctionDefinition {
+	Identifier identifier = 1;
+  repeated Arg args = 4;
+  Type ret = 5;
+}
+
+message EffectFunctionDefinition {
+	Identifier identifier = 1;
+  repeated Arg args = 4;
+  Type ret = 5;
+}
+
+message TypeDefinition {
+	DataType dataType = 1;
+	repeated ConstructorDefinition constructors = 2;
+}
+
+message NativeTypeDefinition {
+	DataType dataType = 1;
+}
